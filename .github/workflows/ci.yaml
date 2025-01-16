@@ -12,12 +12,27 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+    services:
+      postgres:
+        image: postgres:15
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd "pg_isready -U root"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Generate .env file
-        run: echo '${{ secrets.ENV }}' >> .env
+        run: |
+          echo 'DATABASE_URL=postgresql://root:admin@localhost:5432/test_db' >> .env
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -26,6 +41,16 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h localhost -U root -d test_db; do
+            echo "Waiting for database...";
+            sleep 2;
+          done
+
+      - name: Run migrations
+        run: npx prisma db push
 
       - name: Run test
         run: npm run test:integration
