@@ -44,7 +44,7 @@ jobs:
 
       - name: Wait for PostgreSQL to be ready
         run: |
-          until pg_isready -h localhost -U root -d test_db; do
+          until pg_isready -h localhost -p 7654 -U root -d test_db; do
             echo "Waiting for database...";
             sleep 2;
           done
