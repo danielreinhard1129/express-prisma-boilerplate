@@ -12,9 +12,27 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+    services:
+      postgres:
+        image: postgres:15
+        ports:
+          - 7654:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd "pg_isready -U root"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Generate .env file
+        run: |
+          echo '${{ secrets.ENV }}' >> .env
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -23,6 +41,13 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h localhost -p 7654 -U root -d test_db; do
+            echo "Waiting for database...";
+            sleep 2;
+          done
 
       - name: Run test
         run: npm run test:integration
