@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres_container
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=admin
+    volumes:
+      - ./docker/postgres:/var/lib/postgresql/data
+    ports:
+      - "6543:5432"
+    networks:
+      - express-network
+
+networks:
+  express-network:
