@@ -16,7 +16,7 @@ jobs:
       postgres:
         image: postgres:15
         ports:
-          - 5432:5432
+          - 7654:5432
         env:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: admin
