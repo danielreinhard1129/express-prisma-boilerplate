@@ -12,5 +12,14 @@ services:
     networks:
       - express-network
 
+  postgres_testing:
+    image: postgres
+    container_name: postgres_testing
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - "7654:5432"
+
 networks:
   express-network:

@@ -24,7 +24,7 @@ export class SampleController {
 
   getSample = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log(req.user); // token payload
+      req.user; // token payload
       const id = Number(req.params.id);
       const result = await this.sampleService.getSample(id);
 

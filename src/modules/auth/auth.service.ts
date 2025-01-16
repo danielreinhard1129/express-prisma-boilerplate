@@ -29,7 +29,7 @@ export class AuthService {
       throw new ApiError("User not found", 404);
     }
 
-    const isPasswordValid = this.passwordService.comparePassword(
+    const isPasswordValid = await this.passwordService.comparePassword(
       password,
       existingUser.password,
     );
