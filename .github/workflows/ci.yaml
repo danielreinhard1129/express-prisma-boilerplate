@@ -49,8 +49,5 @@ jobs:
             sleep 2;
           done
 
-      - name: Run migrations
-        run: npx prisma db push
-
       - name: Run test
         run: npm run test:integration
