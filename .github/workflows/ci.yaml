@@ -32,7 +32,7 @@ jobs:
 
       - name: Generate .env file
         run: |
-          echo 'DATABASE_URL=postgresql://root:admin@localhost:5432/test_db' >> .env
+          echo '${{ secrets.ENV }}' >> .env
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
