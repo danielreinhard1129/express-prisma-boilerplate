@@ -18,7 +18,7 @@ jobs:
         ports:
           - 7654:5432
         env:
-          POSTGRES_USER: root
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: admin
           POSTGRES_DB: postgres
         options: >-
