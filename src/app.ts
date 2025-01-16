@@ -27,6 +27,9 @@ export default class App {
     const sampleRouter = new SampleRouter();
     const authRouter = new AuthRouter();
 
+    this.app.get("/", (_, res) => {
+      res.send("Welcome");
+    });
     this.app.use("/samples", sampleRouter.getRouter());
     this.app.use("/auth", authRouter.getRouter());
   }
