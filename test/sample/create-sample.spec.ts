@@ -44,4 +44,13 @@ describe("POST /samples", () => {
       "name must be a string, name should not be empty",
     );
   });
+
+  it(`should return an error when image is missing`, async () => {
+    const response = await request(app)
+      .post("/samples")
+      .field("name", "Test Sample");
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message", "Image is required");
+  });
 });
