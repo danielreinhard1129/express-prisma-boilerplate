@@ -1,5 +1,6 @@
 import { plainToInstance } from "class-transformer";
 import { NextFunction, Request, Response } from "express";
+import { ApiError } from "../../utils/api-error";
 import { CreateSampleDTO } from "./dto/create-sample.dto";
 import { GetSamplesDTO } from "./dto/get-samples.dto";
 import { UpdateSampleDTO } from "./dto/update-sample.dto";
@@ -38,6 +39,7 @@ export class SampleController {
     try {
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
       const image = files.image?.[0];
+      if (!image) throw new ApiError("Image is required", 400);
       const body = req.body as CreateSampleDTO;
       const result = await this.sampleService.createSample(body, image);
       res.status(200).send(result);

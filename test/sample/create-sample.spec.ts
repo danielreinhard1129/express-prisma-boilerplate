@@ -3,6 +3,7 @@ import nock from "nock";
 import { join } from "path";
 import request from "supertest";
 import App from "../../src/app";
+import { env } from "../../src/config";
 
 describe("POST /samples", () => {
   const { app } = new App();
@@ -10,7 +11,7 @@ describe("POST /samples", () => {
   beforeEach(() => {
     // Intercept Cloudinary API calls
     nock("https://api.cloudinary.com")
-      .post("/v1_1/cloudname/image/upload")
+      .post(`/v1_1/${env().CLOUDINARY_CLOUD_NAME}/image/upload`)
       .reply(200, {
         secure_url: "http://mocked-url.com/image.jpg",
         public_id: "mocked-public-id",
