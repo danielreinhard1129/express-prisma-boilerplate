@@ -47,9 +47,6 @@ CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ```
 
-> **Note:** Don't forget to fill your `.env` file in GitHub secrets if you want to test continuous integration.
-
-
 ## Scripts
 
 - `build`: Compile TypeScript to JavaScript.
