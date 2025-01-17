@@ -1,34 +1,25 @@
 import { readFileSync } from "fs";
+import nock from "nock";
 import { join } from "path";
 import request from "supertest";
 import App from "../../src/app";
 
-// NOTE: Optional
-// jest.mock("nodemailer", () => ({
-//   createTransport: jest.fn().mockImplementation(() => ({
-//     sendMail: jest.fn(),
-//   })),
-// }));
-
-jest.mock("../../src/modules/mail/mail.service", () => {
-  return {
-    MailService: jest.fn().mockImplementation(() => ({
-      sendEmail: jest.fn().mockResolvedValue({}),
-    })),
-  };
-});
-
-jest.mock("../../src/modules/cloudinary/cloudinary.service", () => {
-  return jest.fn().mockImplementation(() => ({
-    upload: jest.fn().mockResolvedValue({
-      secure_url: "http://mocked-url.com/image.jpg",
-      public_id: "mocked-public-id",
-    }),
-  }));
-});
-
 describe("POST /samples", () => {
   const { app } = new App();
+
+  beforeEach(() => {
+    // Intercept Cloudinary API calls
+    nock("https://api.cloudinary.com")
+      .post("/v1_1/cloudname/image/upload")
+      .reply(200, {
+        secure_url: "http://mocked-url.com/image.jpg",
+        public_id: "mocked-public-id",
+      });
+  });
+
+  afterEach(() => {
+    nock.cleanAll();
+  });
 
   it(`should successfuly create a sample`, async () => {
     const imagePath = join(__dirname, "../mocks", "mock-image.png");

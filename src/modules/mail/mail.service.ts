@@ -1,21 +1,31 @@
+import fs from "fs/promises";
+import handlebars from "handlebars";
 import nodemailer, { Transporter } from "nodemailer";
 import path from "path";
 import { env } from "../../config";
-import handlebars from "handlebars";
-import fs from "fs/promises";
 
 export class MailService {
   private transporter: Transporter;
   private templatesDir: string;
 
   constructor() {
-    this.transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: env().MAIL_USER,
-        pass: env().MAIL_PASSWORD,
-      },
-    });
+    const isTestEnv = process.env.NODE_ENV === "test";
+
+    this.transporter = nodemailer.createTransport(
+      isTestEnv
+        ? {
+            host: "localhost",
+            port: 1025,
+            secure: false,
+          }
+        : {
+            service: "gmail",
+            auth: {
+              user: env().MAIL_USER,
+              pass: env().MAIL_PASSWORD,
+            },
+          },
+    );
 
     this.templatesDir = path.resolve(__dirname, "./templates");
   }
@@ -54,7 +64,7 @@ export class MailService {
 
       await this.transporter.sendMail(mailOptions);
     } catch (error) {
-      console.error("Error sending email:", error);
+      throw "Error sending email";
     }
   }
 }
