@@ -15,7 +15,7 @@ This project is a boilerplate for building a RESTful API using Express, Prisma, 
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/express-prisma-boilerplate.git
+   git clone https://github.com/danielreinhard1129/express-prisma-boilerplate.git
    cd express-prisma-boilerplate
    ```
 
