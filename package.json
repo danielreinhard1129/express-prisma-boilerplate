@@ -8,7 +8,7 @@
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "prepare": "husky",
-    "test:integration": "NODE_ENV=test jest --runInBand"
+    "test:integration": "jest --runInBand"
   },
   "keywords": [],
   "author": "",
