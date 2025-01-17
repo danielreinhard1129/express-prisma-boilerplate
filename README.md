@@ -9,7 +9,6 @@ This project is a boilerplate for building a RESTful API using Express, Prisma, 
 - [Scripts](#scripts)
 - [Testing](#testing)
 - [Conventional Commits](#conventional-commits)
-- [License](#license)
 
 ## Installation
 
