@@ -31,7 +31,6 @@ jobs:
         image: mailhog/mailhog
         ports:
           - 1025:1025
-          - 8025:8025
 
     steps:
       - name: Checkout code
@@ -55,13 +54,6 @@ jobs:
         run: |
           until pg_isready -h localhost -p 7654 -U postgres -d postgres; do
             echo "Waiting for database...";
-            sleep 2;
-          done
-
-      - name: Wait for MailHog to be ready
-        run: |
-          until curl --fail http://localhost:8025; do
-            echo "Waiting for MailHog...";
             sleep 2;
           done
 
