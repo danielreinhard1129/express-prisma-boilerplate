@@ -9,7 +9,7 @@ describe("POST /auth/login", () => {
 
   it(`should login successfully`, async () => {
     const [user] = mockUserData({ numberOfUsers: 1 });
-    const { hashPassword, comparePassword } = new PasswordService();
+    const { hashPassword } = new PasswordService();
     const hashedPassword = await hashPassword("Password123");
     await prisma.user.create({
       data: { ...user, password: hashedPassword },
