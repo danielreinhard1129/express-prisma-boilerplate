@@ -11,7 +11,7 @@
     "test:integration": "jest --runInBand"
   },
   "keywords": [],
-  "author": "",
+  "author": "Daniel Reinhard",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.2.1",
