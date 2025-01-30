@@ -60,11 +60,25 @@ CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 
 Ensure you have Docker installed on your machine. The tests use a separate Docker container for the database to avoid affecting your development database.
 
-To run the tests, use the following command:
+Before running the tests, bring up the required Docker containers:
+
+```sh
+docker compose up -d
+```
+
+Then, to run the integration tests, use the following command:
 
 ```sh
 npm run test:integration
 ```
+
+This will execute the integration tests with the database running in a separate container.
+
+### Explanation:
+
+- **`docker compose up -d`**: This command will start your Docker containers in the background (`-d` stands for detached mode).
+  
+- **`npm run test:integration`**: This command runs your integration tests after the database containers are up and running.
 
 ## Conventional Commits
 
@@ -80,5 +94,4 @@ This project follows the [Conventional Commits](https://www.conventionalcommits.
 - **chore**: Update dependencies
 
 Refer to the [Conventional Commits documentation](https://www.conventionalcommits.org/) for more details.
-
 
