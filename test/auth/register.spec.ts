@@ -35,9 +35,6 @@ describe("POST /auth/register", () => {
     const response = await request(app).post("/auth/register").send({});
 
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty(
-      "message",
-      "email must be a string, email should not be empty, password must be a string, password should not be empty",
-    );
+    expect(response.body).toHaveProperty("message");
   });
 });

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { autoInjectable } from "tsyringe";
 import { env } from "../../config";
 import { JwtMiddleware } from "../../middleware/jwt.middleware";
 import { verifyRole } from "../../middleware/role.middleware";
@@ -8,15 +9,14 @@ import { CreateSampleDTO } from "./dto/create-sample.dto";
 import { UpdateSampleDTO } from "./dto/update-sample.dto";
 import { SampleController } from "./sample.controller";
 
+@autoInjectable()
 export class SampleRouter {
-  private router: Router;
-  private sampleController: SampleController;
-  private jwtMiddleware: JwtMiddleware;
+  private readonly router: Router = Router();
 
-  constructor() {
-    this.sampleController = new SampleController();
-    this.jwtMiddleware = new JwtMiddleware(env().JWT_SECRET);
-    this.router = Router();
+  constructor(
+    private readonly sampleController: SampleController,
+    private readonly jwtMiddleware: JwtMiddleware,
+  ) {
     this.initializeRoutes();
   }
 
@@ -24,7 +24,7 @@ export class SampleRouter {
     this.router.get("/", this.sampleController.getSamples); // NOTE: public route
     this.router.get(
       "/:id",
-      this.jwtMiddleware.verifyToken, // NOTE: private route & RBAC
+      this.jwtMiddleware.verifyToken(env().JWT_SECRET), // NOTE: private route & RBAC
       verifyRole(["USER"]),
       this.sampleController.getSample,
     );

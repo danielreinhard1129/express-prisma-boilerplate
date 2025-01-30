@@ -1,14 +1,12 @@
 import jwt, { SignOptions } from "jsonwebtoken";
 
 export class TokenService {
-  private secretKey: string;
-
-  constructor(secretKey: string) {
-    this.secretKey = secretKey;
-  }
-
-  generateToken = (payload: object, options?: SignOptions): string => {
-    return jwt.sign(payload, this.secretKey, {
+  generateToken = (
+    payload: object,
+    secretKey: string,
+    options?: SignOptions,
+  ): string => {
+    return jwt.sign(payload, secretKey, {
       expiresIn: "2h",
       ...options,
     });

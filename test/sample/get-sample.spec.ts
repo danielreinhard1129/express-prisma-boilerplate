@@ -16,8 +16,11 @@ describe("GET /samples/:id", () => {
 
     const numberOfUsers = 1;
     const [user] = mockUserData({ numberOfUsers });
-    const tokenService = new TokenService(env().JWT_SECRET);
-    const token = tokenService.generateToken({ id: user.id, role: user.role });
+    const tokenService = new TokenService();
+    const token = tokenService.generateToken(
+      { id: user.id, role: user.role },
+      env().JWT_SECRET,
+    );
 
     const response = await request(app)
       .get(`/samples/${sample.id}`)
@@ -30,8 +33,11 @@ describe("GET /samples/:id", () => {
   it(`should return 404 Not Found if the sample with the given id does not exist`, async () => {
     const numberOfUsers = 1;
     const [user] = mockUserData({ numberOfUsers });
-    const tokenService = new TokenService(env().JWT_SECRET);
-    const token = tokenService.generateToken({ id: user.id, role: user.role });
+    const tokenService = new TokenService();
+    const token = tokenService.generateToken(
+      { id: user.id, role: user.role },
+      env().JWT_SECRET,
+    );
 
     const nonExistentSampleId = 9999;
 

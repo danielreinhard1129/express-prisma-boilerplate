@@ -1,3 +1,4 @@
+import { injectable } from "tsyringe";
 import { env } from "../../config";
 import { ApiError } from "../../utils/api-error";
 import PrismaService from "../prisma/prisma.service";
@@ -7,16 +8,13 @@ import { RegisterDTO } from "./dto/register.dto";
 import { PasswordService } from "./password.service";
 import { TokenService } from "./token.service";
 
-export class AuthService {
-  private prisma;
-  private passwordService;
-  private tokenService;
-
-  constructor() {
-    this.prisma = PrismaService.getInstance();
-    this.passwordService = new PasswordService();
-    this.tokenService = new TokenService(env().JWT_SECRET);
-  }
+@injectable()
+export default class AuthService {
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly passwordService: PasswordService,
+    private readonly tokenService: TokenService,
+  ) {}
 
   login = async (body: LoginDTO) => {
     const { email, password } = body;
@@ -38,10 +36,13 @@ export class AuthService {
       throw new ApiError("Invalid credentials", 400);
     }
 
-    const accessToken = this.tokenService.generateToken({
-      id: existingUser.id,
-      role: existingUser.role,
-    });
+    const accessToken = this.tokenService.generateToken(
+      {
+        id: existingUser.id,
+        role: existingUser.role,
+      },
+      env().JWT_SECRET,
+    );
 
     const { password: pw, ...userWithoutPassword } = existingUser;
 

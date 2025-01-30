@@ -2,6 +2,7 @@ import cors from "cors";
 import express, { json } from "express";
 import helmet from "helmet";
 import "reflect-metadata";
+import { container } from "tsyringe";
 import { env } from "./config";
 import { errorMiddleware } from "./middleware/error.middleware";
 import { AuthRouter } from "./modules/auth/auth.router";
@@ -24,8 +25,8 @@ export default class App {
   }
 
   private routes(): void {
-    const sampleRouter = new SampleRouter();
-    const authRouter = new AuthRouter();
+    const sampleRouter = container.resolve(SampleRouter);
+    const authRouter = container.resolve(AuthRouter);
 
     this.app.get("/", (_, res) => {
       res.send("Welcome");

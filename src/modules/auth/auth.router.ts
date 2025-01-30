@@ -1,16 +1,15 @@
 import { Router } from "express";
+import { autoInjectable } from "tsyringe";
 import { validateBody } from "../../middleware/validation.middleware";
 import { AuthController } from "./auth.controller";
 import { LoginDTO } from "./dto/login.dto";
 import { RegisterDTO } from "./dto/register.dto";
 
+@autoInjectable()
 export class AuthRouter {
-  private router: Router;
-  private authController: AuthController;
+  private readonly router: Router = Router();
 
-  constructor() {
-    this.authController = new AuthController();
-    this.router = Router();
+  constructor(private readonly authController: AuthController) {
     this.initializeRoutes();
   }
 
