@@ -1,6 +1,6 @@
 # Express Prisma Boilerplate
 
-This project is a boilerplate for building a RESTful API using Express, Prisma, and TypeScript. It includes authentication, sample CRUD operations, and various middleware for validation, error handling, and more.
+This project is a boilerplate for building a RESTful API using Express, Prisma, Typescript and Dependency Injection (DI). It includes authentication, sample CRUD operations, and various middleware for validation, error handling, and more.
 
 ## Table of Contents
 
