@@ -1,17 +1,15 @@
 import { plainToInstance } from "class-transformer";
 import { NextFunction, Request, Response } from "express";
+import { injectable } from "tsyringe";
 import { ApiError } from "../../utils/api-error";
 import { CreateSampleDTO } from "./dto/create-sample.dto";
 import { GetSamplesDTO } from "./dto/get-samples.dto";
 import { UpdateSampleDTO } from "./dto/update-sample.dto";
 import { SampleService } from "./sample.service";
 
+@injectable()
 export class SampleController {
-  private sampleService: SampleService;
-
-  constructor() {
-    this.sampleService = new SampleService();
-  }
+  constructor(private readonly sampleService: SampleService) {}
 
   getSamples = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -38,8 +36,8 @@ export class SampleController {
   createSample = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-      const image = files.image?.[0];
-      if (!image) throw new ApiError("Image is required", 400);
+      const image = files?.image?.[0];
+      if (!Boolean(image)) throw new ApiError("Image is required", 400);
       const body = req.body as CreateSampleDTO;
       const result = await this.sampleService.createSample(body, image);
       res.status(200).send(result);

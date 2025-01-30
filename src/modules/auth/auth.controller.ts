@@ -1,14 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { AuthService } from "./auth.service";
+import { injectable } from "tsyringe";
+import AuthService from "./auth.service";
 import { LoginDTO } from "./dto/login.dto";
 import { RegisterDTO } from "./dto/register.dto";
 
+@injectable()
 export class AuthController {
-  private authService: AuthService;
-
-  constructor() {
-    this.authService = new AuthService();
-  }
+  constructor(private readonly authService: AuthService) {}
 
   login = async (req: Request, res: Response, next: NextFunction) => {
     try {

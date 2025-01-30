@@ -10,7 +10,7 @@ export const mockUserData = ({
 
     return {
       id: userNumber,
-      email: "Email" + userNumber,
+      email: "Email" + userNumber + "@mail.com",
       password: "Password" + userNumber,
       role: Role.USER,
       deletedAt: null,
