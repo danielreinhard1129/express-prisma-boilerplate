@@ -37,7 +37,7 @@ This project is a boilerplate for building a RESTful API using Express, Prisma, 
 Create a `.env` file in the root directory and add the following environment variables:
 
 ```env
-DATABASE_URL="postgresql://postgres:password@localhost:6543/postgres"
+DATABASE_URL="postgresql://postgres:admin@localhost:6543/postgres"
 PORT=8000
 JWT_SECRET=your_jwt_secret
 MAIL_USER=your_email@example.com
