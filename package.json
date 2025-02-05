@@ -9,7 +9,7 @@
     "dev": "nodemon src/index.ts",
     "prepare": "husky",
     "test:integration": "TEST_TYPE=integration jest --runInBand",
-    "test:unit": "jest"
+    "test:unit": "jest --forceExit --detectOpenHandles"
   },
   "keywords": [],
   "author": "Daniel Reinhard",
