@@ -53,6 +53,7 @@ CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 - `start`: Start the application.
 - `dev`: Start the application in development mode with hot reloading.
 - `test:integration`: Run integration tests.
+- `test:unit`: Run unit tests.
 
 ## Testing
 
