@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { injectable } from "tsyringe";
-import AuthService from "./auth.service";
+import { AuthService } from "./auth.service";
 import { LoginDTO } from "./dto/login.dto";
 import { RegisterDTO } from "./dto/register.dto";
 

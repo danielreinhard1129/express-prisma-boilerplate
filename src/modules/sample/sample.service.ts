@@ -1,9 +1,9 @@
 import { Prisma } from "@prisma/client";
 import { injectable } from "tsyringe";
-import CloudinaryService from "../cloudinary/cloudinary.service";
+import { CloudinaryService } from "../cloudinary/cloudinary.service";
 import { MailService } from "../mail/mail.service";
 import { PaginationService } from "../pagination/pagination.service";
-import PrismaService from "../prisma/prisma.service";
+import { PrismaService } from "../prisma/prisma.service";
 import { CreateSampleDTO } from "./dto/create-sample.dto";
 import { GetSamplesDTO } from "./dto/get-samples.dto";
 import { UpdateSampleDTO } from "./dto/update-sample.dto";
@@ -14,7 +14,7 @@ export class SampleService {
     private readonly prisma: PrismaService,
     private readonly mailService: MailService,
     private readonly paginationService: PaginationService,
-    private readonly cloudinaryService: CloudinaryService,
+    private readonly fileService: CloudinaryService,
   ) {}
 
   getSamples = async (dto: GetSamplesDTO) => {
@@ -62,7 +62,7 @@ export class SampleService {
   };
 
   createSample = async (body: CreateSampleDTO, image: Express.Multer.File) => {
-    const { secure_url } = await this.cloudinaryService.upload(image);
+    const { secure_url } = await this.fileService.upload(image);
 
     this.mailService.sendEmail(
       "danielreinhard1129@gmail.com",

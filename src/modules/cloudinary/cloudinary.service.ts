@@ -2,7 +2,7 @@ import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 import { Readable } from "stream";
 import { env } from "../../config";
 
-class CloudinaryService {
+export class CloudinaryService {
   constructor() {
     const { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME } =
       env();
@@ -52,5 +52,3 @@ class CloudinaryService {
     }
   };
 }
-
-export default CloudinaryService;
