@@ -19,7 +19,7 @@ describe("POST /auth/login", () => {
       .post("/auth/login")
       .send({ email: user.email, password: "Password123" });
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(123123);
     expect(response.body).toHaveProperty("accessToken");
   });
 
