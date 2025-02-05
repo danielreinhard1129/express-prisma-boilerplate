@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-class PrismaService extends PrismaClient {
+export class PrismaService extends PrismaClient {
   constructor() {
     super();
 
@@ -10,5 +10,3 @@ class PrismaService extends PrismaClient {
     });
   }
 }
-
-export default PrismaService;

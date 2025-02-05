@@ -7,6 +7,9 @@ module.exports = {
     "^.+.tsx?$": ["ts-jest", {}],
   },
   setupFilesAfterEnv: ["<rootDir>/test/setup.ts"],
-  testMatch: ["<rootDir>/test/**/*.(spec|test).ts"],
+  testMatch:
+    process.env.TEST_TYPE === "integration"
+      ? ["<rootDir>/test/**/*.(spec|test).ts"]
+      : ["<rootDir>/src/**/*.(spec|test).ts"],
   modulePathIgnorePatterns: ["<rootDir>/dist/"],
 };

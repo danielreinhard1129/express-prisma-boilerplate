@@ -1,7 +1,7 @@
 import { injectable } from "tsyringe";
 import { env } from "../../config";
 import { ApiError } from "../../utils/api-error";
-import PrismaService from "../prisma/prisma.service";
+import { PrismaService } from "../prisma/prisma.service";
 import { prismaExclude } from "../prisma/utils";
 import { LoginDTO } from "./dto/login.dto";
 import { RegisterDTO } from "./dto/register.dto";
@@ -9,7 +9,7 @@ import { PasswordService } from "./password.service";
 import { TokenService } from "./token.service";
 
 @injectable()
-export default class AuthService {
+export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly passwordService: PasswordService,
