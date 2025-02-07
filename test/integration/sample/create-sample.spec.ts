@@ -2,8 +2,8 @@ import { readFileSync } from "fs";
 import nock from "nock";
 import { join } from "path";
 import request from "supertest";
-import App from "../../src/app";
-import { env } from "../../src/config";
+import App from "../../../src/app";
+import { env } from "../../../src/config";
 
 describe("POST /samples", () => {
   const { app } = new App();
@@ -23,7 +23,7 @@ describe("POST /samples", () => {
   });
 
   it(`should successfuly create a sample`, async () => {
-    const imagePath = join(__dirname, "../mocks", "mock-image.png");
+    const imagePath = join(__dirname, "../../fixtures", "mock-image.png");
     const imageBuffer = readFileSync(imagePath);
     const response = await request(app)
       .post("/samples")

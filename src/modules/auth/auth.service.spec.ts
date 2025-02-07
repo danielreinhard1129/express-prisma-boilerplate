@@ -1,5 +1,5 @@
 import { Context, createMockContext, MockContext } from "../../../test/context";
-import { mockUserData } from "../../../test/user/utils";
+import { mockUserData } from "../../../test/integration/user/utils";
 import { AuthService } from "./auth.service";
 import { PasswordService } from "./password.service";
 import { TokenService } from "./token.service";

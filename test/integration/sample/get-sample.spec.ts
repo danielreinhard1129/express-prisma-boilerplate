@@ -1,8 +1,8 @@
 import request from "supertest";
-import App from "../../src/app";
-import { env } from "../../src/config";
-import { TokenService } from "../../src/modules/auth/token.service";
-import prisma from "../../src/prisma";
+import App from "../../../src/app";
+import { env } from "../../../src/config";
+import { TokenService } from "../../../src/modules/auth/token.service";
+import prisma from "../../../src/prisma";
 import { mockUserData } from "../user/utils";
 import { mockSampleData } from "./utils";
 

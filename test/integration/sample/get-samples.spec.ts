@@ -1,6 +1,6 @@
 import request from "supertest";
-import App from "../../src/app";
-import prisma from "../../src/prisma";
+import App from "../../../src/app";
+import prisma from "../../../src/prisma";
 import { mockSampleData } from "./utils";
 
 describe("GET /samples", () => {

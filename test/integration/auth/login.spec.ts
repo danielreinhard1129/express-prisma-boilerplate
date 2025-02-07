@@ -1,7 +1,7 @@
 import request from "supertest";
-import App from "../../src/app";
-import { PasswordService } from "../../src/modules/auth/password.service";
-import prisma from "../../src/prisma";
+import App from "../../../src/app";
+import { PasswordService } from "../../../src/modules/auth/password.service";
+import prisma from "../../../src/prisma";
 import { mockUserData } from "../user/utils";
 
 describe("POST /auth/login", () => {
