@@ -11,5 +11,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true
-  }
+  },
+  "exclude": ["test", "**/*.spec.ts"]
 }
