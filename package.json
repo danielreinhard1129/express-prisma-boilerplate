@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-files",
+    "copy-files": "cpx src/modules/mail/templates/**/* dist/modules/mail/templates",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "prepare": "husky",
-    "test:integration": "TEST_TYPE=integration jest --runInBand",
+    "test:integration": "cross-env TEST_TYPE=integration jest --runInBand",
     "test:unit": "jest --forceExit --detectOpenHandles"
   },
   "keywords": [],
@@ -46,6 +47,8 @@
     "@types/node": "^22.10.6",
     "@types/nodemailer": "^6.4.17",
     "@types/supertest": "^6.0.2",
+    "cpx2": "^8.0.0",
+    "cross-env": "^7.0.3",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-mock-extended": "^4.0.0-beta1",
