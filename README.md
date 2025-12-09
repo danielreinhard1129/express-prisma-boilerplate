@@ -13,12 +13,14 @@ This project is a boilerplate for building a RESTful API using Express, Prisma, 
 ## Installation
 
 1. Clone the repository:
+
    ```sh
    git clone https://github.com/danielreinhard1129/express-prisma-boilerplate.git
    cd express-prisma-boilerplate
    ```
 
 2. Install dependencies:
+
    ```sh
    npm install
    ```
@@ -75,11 +77,22 @@ npm run test:integration
 
 This will execute the integration tests with the database running in a separate container.
 
+### Unit Tests
+
+Unit tests do not require Docker or a running database because dependencies are mocked using Dependency Injection (DI).
+
+To run the unit tests, use:
+
+```sh
+npm run test:unit
+```
+
 ### Explanation:
 
 - **`docker compose up -d`**: This command will start your Docker containers in the background (`-d` stands for detached mode).
-  
 - **`npm run test:integration`**: This command runs your integration tests after the database containers are up and running.
+
+- **`npm run test:unit`**: Executes unit tests with mocked services, faster and without external dependencies.
 
 ## Conventional Commits
 
@@ -95,4 +108,3 @@ This project follows the [Conventional Commits](https://www.conventionalcommits.
 - **chore**: Update dependencies
 
 Refer to the [Conventional Commits documentation](https://www.conventionalcommits.org/) for more details.
-
