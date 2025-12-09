@@ -23,6 +23,7 @@ services:
 
   mailhog:
     image: mailhog/mailhog
+    platform: linux/amd64
     container_name: mailhog
     restart: always
     ports:
