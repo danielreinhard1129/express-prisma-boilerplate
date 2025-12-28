@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express";
 
 export function validateBody(dtoClass: any) {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const dtoInstance = plainToInstance(dtoClass, req.body);
+    const dtoInstance = plainToInstance(dtoClass, req.body || {});
 
     const errors = await validate(dtoInstance);
 
@@ -16,6 +16,8 @@ export function validateBody(dtoClass: any) {
       res.status(400).send({ message });
       return;
     }
+
+    req.body = dtoInstance;
 
     next();
   };
