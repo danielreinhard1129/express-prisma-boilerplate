@@ -11,10 +11,12 @@ describe("PATCH /samples/:id", () => {
     const [sample] = mockSampleData({ numberOfSamples });
     await prisma.sample.createMany({ data: sample });
 
-    const response = await request(app).patch(`/samples/${sample.id}`);
+    const response = await request(app)
+      .patch(`/samples/${sample.id}`)
+      .send({ name: "Updated Sample" });
 
     expect(response.status).toBe(200);
-    expect(response.body).toMatchObject(JSON.parse(JSON.stringify(sample)));
+    expect(response.body.name).toBe("Updated Sample");
   });
 
   it(`should return an error when attempting to update a non-existent sample`, async () => {
